@@ -21,16 +21,15 @@ function getElements(selection) {
 
 const firstLetter = getElements('#firstLetter')
 const values = getElements('#values')
-
 window.addEventListener('DOMContentLoaded', function () {
   firstLetter.innerHTML = stateFirstLetter
     .map((i) => {
-      return `<option data-id="${i}" value="${i}">${i.toUpperCase()}</option>`
+      return `<option value="${i}">${i.toUpperCase()}</option>`
     })
     .join('')
   values.innerHTML = stateValues
     .map((i) => {
-      return `<option data-id="${i}" value="${i}">${i[0].toUpperCase()}${i.slice(
+      return `<option value="${i}">${i[0].toUpperCase()}${i.slice(
         1
       )}</option>`
     })
@@ -38,12 +37,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const selectedFirstLetter = getElements('#firstLetter')
   const selectedValues = getElements('#values')
+
   selectedFirstLetter.addEventListener('change', (e) => {
-    selectedValues.value = state[e.target.value]
+   const selectedValue = e.target.value
+    selectedValues.value = state[selectedValue]
   })
   selectedValues.addEventListener('change', (e) => {
+    const selectedValue = e.target.value
     selectedFirstLetter.value = stateFirstLetter.find(
-      (i) => state[i] === e.target.value
+      (i) => state[i] === selectedValue
     )
   })
 })
